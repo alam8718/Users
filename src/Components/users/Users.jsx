@@ -11,6 +11,7 @@ function Users() {
         {users.map((user, index) => (
           <Link
             to={`/user/${user?.id}`}
+            target="_blank"
             key={index}
             className=" my-3 w-full sm:w-auto flex justify-center flex-wrap ">
             <SingleUserCard user={user} />

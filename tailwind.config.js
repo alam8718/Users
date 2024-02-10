@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        "inter": ['Bebas Neue', "sans-serif"]
+        "inter": ['Bebas Neue', "sans-serif"],
+        "roboto": ['Roboto', "sans-serif"]
       },
       screens: {
         "max-mobile": "426px",
