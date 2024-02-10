@@ -5,7 +5,19 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        "inter": ['Bebas Neue', "sans-serif"]
+      },
+      screens: {
+        "max-mobile": "426px",
+        "max-tablet": "769px",
+        "min-laptop": "1024px",
+        "max-laptop": "1441px",
+        "window-screen": "1980px",
+
+      }
+    },
   },
   plugins: [],
 }
