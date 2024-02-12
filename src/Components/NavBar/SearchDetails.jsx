@@ -1,10 +1,11 @@
 import React from "react";
 
 function SearchDetails({data}) {
+  console.log(length);
   return (
     <>
-      <div className="my-4 px-4 w-full h-[calc(100%-100px)]  ">
-        <div className="w-full h-[70px] flex items-center pl-6 pr-2 gap-4 bg-white  rounded-xl">
+      <div className="my-4  w-full h-[calc(100%-100px)]  ">
+        <div className="w-full h-[70px] flex items-center pl-6  gap-4 bg-white  rounded-xl">
           <div>
             <img src={data?.image} alt="" className="w-[60px] h-[50px]" />
           </div>

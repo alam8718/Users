@@ -6,7 +6,7 @@ import SearchDetails from "./SearchDetails";
 import {Link} from "react-router-dom";
 
 function SearchBar() {
-  const {users, setUsers} = useGlobalContext();
+  const {users} = useGlobalContext();
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
 
@@ -49,8 +49,9 @@ function SearchBar() {
               <CiSearch size={22} />
             </button>
           </div>
+          {/* showin gsearch result part  */}
           {searchResult && search !== "" && (
-            <div className="absolute top-16 max-tablet:top-16 max-tablet:left-10 bg-gray-100 w-[400px] max-tablet:w-[500px] h-[600px] rounded-2xl overflow-y-scroll pb-6">
+            <div className="absolute top-16 max-tablet:top-16 max-tablet:left-10 bg-gray-200 w-[400px] max-tablet:w-[500px] max-h-[600px] rounded-2xl overflow-y-scroll px-6">
               {searchResult.map((result, index) => (
                 <Link to={`/user/${result?.id}`} target="_blank" key={index}>
                   <div>
@@ -58,6 +59,13 @@ function SearchBar() {
                   </div>
                 </Link>
               ))}
+            </div>
+          )}
+          {searchResult.length === 0 && (
+            <div className="absolute top-16 max-tablet:top-16 max-tablet:left-10 bg-gray-200 w-[400px] max-tablet:w-[500px] h-[200px] rounded-2xl  px-6 ">
+              <h1 className="w-full h-full flex justify-center items-center font-bold text-lg text-gray-500">
+                No results found for query
+              </h1>
             </div>
           )}
         </div>
