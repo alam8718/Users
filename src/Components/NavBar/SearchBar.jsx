@@ -5,23 +5,14 @@ import SearchDetails from "./SearchDetails";
 import {Link} from "react-router-dom";
 
 function SearchBar() {
-  const {users} = useGlobalContext();
-  const [search, setSearch] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
+  const {search, setSearch, searchResult} = useGlobalContext();
   const [focus, setFocus] = useState(false);
 
   function handleChange(e) {
     setSearch(e.target.value);
   }
 
-  useEffect(() => {
-    const filterSearch = users.filter((user) =>
-      user.username.toLowerCase().includes(search.toLowerCase())
-    );
-    setSearchResult(filterSearch);
-  }, [search]);
-
-  console.log(searchResult);
+  // console.log(searchResult);
 
   return (
     <>
@@ -41,25 +32,32 @@ function SearchBar() {
               />
             </div>
           </div>
-          {/* showin gsearch result part  */}
-          {searchResult.length > 0 && search !== "" && focus ? (
-            <div className="absolute top-16 max-tablet:top-16 max-tablet:left-10 bg-gray-200 w-[400px] max-tablet:w-[500px] max-h-[600px] rounded-2xl overflow-y-scroll px-6">
-              {searchResult.map((result, index) => (
-                <Link to={`/user/${result?.id}`} target="_blank" key={index}>
-                  <div>
-                    <SearchDetails data={result} />
-                  </div>
-                </Link>
-              ))}
-            </div>
-          ) : (
+          {/* showing search result part  */}
+          {focus && (
             <>
-              {focus && (
-                <div className="absolute top-16 max-tablet:top-16 max-tablet:left-10 bg-gray-200 w-[400px] max-tablet:w-[500px] h-[200px] rounded-2xl  px-6 ">
-                  <h1 className="w-full h-full flex justify-center items-center font-bold text-lg text-gray-500">
-                    No results found for query
-                  </h1>
+              {searchResult.length > 0 && search !== "" ? (
+                <div className="absolute top-16 max-tablet:top-16 max-tablet:left-10 bg-gray-200 w-[400px] max-tablet:w-[500px] max-h-[600px] duration-500 rounded-2xl overflow-y-scroll px-6">
+                  {searchResult.map((result, index) => (
+                    <Link
+                      to={`/user/${result?.id}`}
+                      target="_blank"
+                      key={index}>
+                      <div>
+                        <SearchDetails data={result} />
+                      </div>
+                    </Link>
+                  ))}
                 </div>
+              ) : (
+                <>
+                  {
+                    <div className="absolute top-16 max-tablet:top-16 max-tablet:left-10 bg-gray-200 w-[400px] max-tablet:w-[500px] h-[200px] rounded-2xl  px-6 ">
+                      <h1 className="w-full h-full flex justify-center items-center font-bold text-lg text-gray-500">
+                        No results found for query
+                      </h1>
+                    </div>
+                  }
+                </>
               )}
             </>
           )}

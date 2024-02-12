@@ -4,6 +4,8 @@ export const AppContext = createContext();
 export const AppProvider = ({children}) => {
   const [users, setUsers] = useState([]);
   const [sortName, setSortName] = useState("");
+  const [search, setSearch] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
 
   // fetching data from api
   const fetchingData = async () => {
@@ -69,6 +71,13 @@ export const AppProvider = ({children}) => {
   };
 
   useEffect(() => {
+    const filterSearch = users.filter((user) =>
+      user.username.toLowerCase().includes(search.toLowerCase())
+    );
+    setSearchResult(filterSearch);
+  }, [search]);
+
+  useEffect(() => {
     sortData(sortName);
   }, [sortName]);
 
@@ -87,6 +96,10 @@ export const AppProvider = ({children}) => {
         setUsers,
         sortName,
         setSortName,
+        search,
+        setSearch,
+        searchResult,
+        setSearchResult,
       }}>
       {children}
     </AppContext.Provider>
