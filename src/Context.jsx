@@ -5,7 +5,6 @@ export const AppProvider = ({children}) => {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
   const [sortName, setSortName] = useState("");
-  const [sorttedResult, setSorttedResult] = useState([]);
 
   // fetching data from api
   const fetchingData = async () => {
@@ -19,12 +18,66 @@ export const AppProvider = ({children}) => {
     }
   };
 
+  //sorting data
+  const sortData = (para) => {
+    const userCopy = [...users];
+    if (para === "firstName" || para === "email") {
+      userCopy.sort((a, b) => {
+        const first = a[para].toLowerCase();
+        const second = b[para].toLowerCase();
+
+        if (first > second) {
+          return 1;
+        } else if (first < second) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
+      console.log("sorted data", userCopy);
+      setUsers(userCopy);
+    } else if (para === "company") {
+      userCopy.sort((a, b) => {
+        const first = a[para]?.name.toLowerCase();
+        const second = b[para]?.name.toLowerCase();
+
+        if (first > second) {
+          return 1;
+        } else if (first < second) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
+      console.log("sorted company data  data", userCopy);
+      setUsers(userCopy);
+    } else {
+      userCopy.sort((a, b) => {
+        const first = a[para];
+        const second = b[para];
+
+        if (first > second) {
+          return 1;
+        } else if (first < second) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
+      console.log("sorted company data  data", userCopy);
+      setUsers(userCopy);
+    }
+  };
+
+  useEffect(() => {
+    sortData(sortName);
+  }, [sortName]);
+
   useEffect(() => {
     fetchingData();
   }, []);
 
   // console.log(`I am search -> ${sortName}`);
-  // console.log(`I am sort result  -> ${sortingResult}`);
   // console.log(`I am user ${user}`);
   // console.log(`I am user id ${userID}`);
 
@@ -36,8 +89,6 @@ export const AppProvider = ({children}) => {
         setSearch,
         sortName,
         setSortName,
-        sorttedResult,
-        setSorttedResult,
       }}>
       {children}
     </AppContext.Provider>
