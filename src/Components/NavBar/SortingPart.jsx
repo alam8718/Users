@@ -18,7 +18,7 @@ function SortingPart() {
               id="sorting"
               value={sortName}
               onChange={handleSelect}
-              className=" pl-3 pr-4 py-1 text-sm border border-amber-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-lg">
+              className=" pl-3 pr-4 py-1 text-sm border border-gray-300 focus:outline-none focus:border-amber-500 rounded-lg">
               <option value="id">Default</option>
               <option value="firstName">Name</option>
               <option value="email">Email</option>

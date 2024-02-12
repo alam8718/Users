@@ -3,7 +3,6 @@ import {createContext, useContext, useEffect, useState} from "react";
 export const AppContext = createContext();
 export const AppProvider = ({children}) => {
   const [users, setUsers] = useState([]);
-  const [search, setSearch] = useState("");
   const [sortName, setSortName] = useState("");
 
   // fetching data from api
@@ -34,7 +33,7 @@ export const AppProvider = ({children}) => {
           return 0;
         }
       });
-      console.log("sorted data", userCopy);
+      // console.log("sorted data", userCopy);
       setUsers(userCopy);
     } else if (para === "company") {
       userCopy.sort((a, b) => {
@@ -49,7 +48,7 @@ export const AppProvider = ({children}) => {
           return 0;
         }
       });
-      console.log("sorted company data  data", userCopy);
+      // console.log("sorted company data", userCopy);
       setUsers(userCopy);
     } else {
       userCopy.sort((a, b) => {
@@ -64,7 +63,7 @@ export const AppProvider = ({children}) => {
           return 0;
         }
       });
-      console.log("sorted company data  data", userCopy);
+      // console.log("sorted default data", userCopy);
       setUsers(userCopy);
     }
   };
@@ -77,7 +76,7 @@ export const AppProvider = ({children}) => {
     fetchingData();
   }, []);
 
-  // console.log(`I am search -> ${sortName}`);
+  // console.log(`I am filter search -> ${}`);
   // console.log(`I am user ${user}`);
   // console.log(`I am user id ${userID}`);
 
@@ -85,8 +84,7 @@ export const AppProvider = ({children}) => {
     <AppContext.Provider
       value={{
         users,
-        search,
-        setSearch,
+        setUsers,
         sortName,
         setSortName,
       }}>
